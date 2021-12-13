@@ -1,0 +1,209 @@
+CCS PCM C Compiler, Version 5.015, 5967               05-Kas-21 13:57
+
+               Filename:   C:\Users\Admin\Desktop\CCS_Github_\(29) Capture Modu Uygulama\(2) CCS_C\CCS_C.lst
+
+               ROM used:   126 words (2%)
+                           Largest free fragment is 2048
+               RAM used:   13 (4%) at main() level
+                           13 (4%) worst case
+               Stack used: 1 locations (0 in main + 1 for interrupts)
+               Stack size: 8
+
+*
+0000:  MOVLW  00
+0001:  MOVWF  0A
+0002:  GOTO   04D
+0003:  NOP
+0004:  MOVWF  7F
+0005:  SWAPF  03,W
+0006:  CLRF   03
+0007:  MOVWF  21
+0008:  MOVF   0A,W
+0009:  MOVWF  20
+000A:  CLRF   0A
+000B:  MOVF   04,W
+000C:  MOVWF  22
+000D:  MOVF   77,W
+000E:  MOVWF  23
+000F:  MOVF   78,W
+0010:  MOVWF  24
+0011:  MOVF   79,W
+0012:  MOVWF  25
+0013:  MOVF   7A,W
+0014:  MOVWF  26
+0015:  BCF    03.7
+0016:  BCF    03.5
+0017:  MOVLW  8C
+0018:  MOVWF  04
+0019:  BTFSS  00.2
+001A:  GOTO   01D
+001B:  BTFSC  0C.2
+001C:  GOTO   034
+001D:  MOVLW  8D
+001E:  MOVWF  04
+001F:  BTFSS  00.0
+0020:  GOTO   023
+0021:  BTFSC  0D.0
+0022:  GOTO   037
+0023:  MOVF   22,W
+0024:  MOVWF  04
+0025:  MOVF   23,W
+0026:  MOVWF  77
+0027:  MOVF   24,W
+0028:  MOVWF  78
+0029:  MOVF   25,W
+002A:  MOVWF  79
+002B:  MOVF   26,W
+002C:  MOVWF  7A
+002D:  MOVF   20,W
+002E:  MOVWF  0A
+002F:  SWAPF  21,W
+0030:  MOVWF  03
+0031:  SWAPF  7F,F
+0032:  SWAPF  7F,W
+0033:  RETFIE
+0034:  BCF    0A.3
+0035:  BCF    0A.4
+0036:  GOTO   03A
+0037:  BCF    0A.3
+0038:  BCF    0A.4
+0039:  GOTO   041
+.................... #include <16f877.h>                                                    
+.................... //////////// Standard Header file for the PIC16F877 device //////////////// 
+.................... /////////////////////////////////////////////////////////////////////////// 
+.................... ////        (C) Copyright 1996, 2013 Custom Computer Services          //// 
+.................... //// This source code may only be used by licensed users of the CCS C  //// 
+.................... //// compiler.  This source code may only be distributed to other      //// 
+.................... //// licensed users of the CCS C compiler.  No other use, reproduction //// 
+.................... //// or distribution is permitted without written permission.          //// 
+.................... //// Derivative programs created using this software in object code    //// 
+.................... //// form are not restricted in any way.                               //// 
+.................... /////////////////////////////////////////////////////////////////////////// 
+.................... #device PIC16F877 
+....................  
+.................... #list 
+....................  
+.................... #fuses HS,NOWDT,NOPUT,NOLVP,NOCPD,NOPROTECT,NODEBUG,NOBROWNOUT,NOWRT       
+.................... #use delay (clock = 4000000)    
+....................  
+.................... #use fast_io(b) 
+.................... #use fast_io(c) 
+....................  
+.................... int i = 0; 
+....................  
+.................... #INT_CCP1 
+.................... void yakala1_kesmesi(){             // CCP1 kesmesi her 4 yukselen kenarda 1 yakalama yapacak 
+....................    i++;                             // RC2 butonu 4 kez lojik 1 oldugunda i = i+1; 
+003A:  INCF   27,F
+....................    output_b(i);    
+003B:  MOVF   27,W
+003C:  MOVWF  06
+.................... } 
+....................  
+003D:  BCF    0C.2
+003E:  BCF    0A.3
+003F:  BCF    0A.4
+0040:  GOTO   023
+.................... #INT_CCP2 
+.................... void yakala2_kesmesi(){             // CCP2 kesmesi her 1 yukselen kenarda 1 yakalama yapacak 
+....................    if(i == 0)                       // RC1 butonu her lojik 1 oldugunda i = i-1; 
+0041:  MOVF   27,F
+0042:  BTFSS  03.2
+0043:  GOTO   046
+....................       i = 1; 
+0044:  MOVLW  01
+0045:  MOVWF  27
+....................        
+....................    i--; 
+0046:  DECF   27,F
+....................    output_b(i); 
+0047:  MOVF   27,W
+0048:  MOVWF  06
+0049:  BCF    0D.0
+004A:  BCF    0A.3
+004B:  BCF    0A.4
+004C:  GOTO   023
+.................... } 
+....................  
+.................... void main() 
+004D:  MOVF   03,W
+004E:  ANDLW  1F
+004F:  MOVWF  03
+0050:  CLRF   27
+0051:  BSF    03.5
+0052:  BSF    1F.0
+0053:  BSF    1F.1
+0054:  BSF    1F.2
+0055:  BCF    1F.3
+0056:  BCF    03.7
+.................... { 
+....................    setup_psp(PSP_DISABLED); 
+0057:  BCF    09.4
+....................   // setup_timer_1(T1_DISABLED);      Capture modu timer1'i kullanir 
+....................    setup_timer_2(T2_DISABLED,0,1); 
+0058:  MOVLW  00
+0059:  MOVWF  78
+005A:  BCF    03.5
+005B:  MOVWF  12
+005C:  MOVLW  00
+005D:  BSF    03.5
+005E:  MOVWF  12
+....................    setup_adc_ports(NO_ANALOGS); 
+005F:  BSF    1F.0
+0060:  BSF    1F.1
+0061:  BSF    1F.2
+0062:  BCF    1F.3
+....................    setup_adc(ADC_OFF); 
+0063:  BCF    03.5
+0064:  BCF    1F.0
+....................   // setup_CCP1(CCP_OFF);     
+....................   // setup_CCP2(CCP_OFF); 
+....................     
+....................    set_tris_b(0x00); 
+0065:  BSF    03.5
+0066:  MOVWF  06
+....................    set_tris_c(0x06); 
+0067:  MOVLW  06
+0068:  MOVWF  07
+....................    output_b(0x00); 
+0069:  BCF    03.5
+006A:  CLRF   06
+....................    output_c(0x00); 
+006B:  CLRF   07
+....................     
+....................    enable_interrupts(INT_CCP1); 
+006C:  BSF    03.5
+006D:  BSF    0C.2
+....................    enable_interrupts(INT_CCP2); 
+006E:  BSF    0D.0
+....................    enable_interrupts(GLOBAL); 
+006F:  MOVLW  C0
+0070:  BCF    03.5
+0071:  IORWF  0B,F
+....................     
+....................    setup_ccp1(CCP_CAPTURE_DIV_4);   // CCP1 kesmesi her 4 yukselen kenarda 1 yakalama yapacak 
+0072:  CLRF   17
+0073:  MOVLW  06
+0074:  MOVWF  17
+....................    setup_ccp2(CCP_CAPTURE_RE);      // CCP2 kesmesi her 1 yukselen kenarda 1 yakalama yapacak 
+0075:  CLRF   1D
+0076:  MOVLW  05
+0077:  MOVWF  1D
+....................     
+....................    CCP_1_HIGH = 0x00;               // CCPR1H kaydedicisi sifirlaniyor (Yuksek 8 biti) 
+0078:  CLRF   16
+....................    CCP_1_LOW = 0x00;                // CCPR1H kaydedicisi sifirlaniyor (Dusuk 8 biti) 
+0079:  CLRF   15
+....................     
+....................    CCP_2_HIGH = 0x00;               // CCPR2H kaydedicisi sifirlaniyor (Yuksek 8 biti) 
+007A:  CLRF   1C
+....................    CCP_2_LOW = 0x00;                // CCPR2H kaydedicisi sifirlaniyor (Dusuk 8 biti) 
+007B:  CLRF   1B
+....................        
+....................    while(1); 
+007C:  GOTO   07C
+.................... } 
+007D:  SLEEP
+
+Configuration Fuses:
+   Word  1: 3F3A   HS NOWDT NOPUT NOBROWNOUT NOLVP NOCPD NOWRT NODEBUG NOPROTECT

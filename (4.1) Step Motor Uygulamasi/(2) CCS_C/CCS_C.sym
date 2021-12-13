@@ -1,0 +1,110 @@
+004-005 @WRITE_PROGRAM_MEMORY8.P1
+004-005 @READ_PROGRAM_MEMORY8.P2
+006     lcdlat
+006     lcd
+008     PSP_DATA
+015     CCP_1
+015     CCP_1_LOW
+016     CCP_1_HIGH
+01B     CCP_2
+01B     CCP_2_LOW
+01C     CCP_2_HIGH
+020     adim
+021     durum
+022     lcd_init.i
+022     @PRINTF_U_640.P1
+022     @PSTRINGCN7_640.P2
+022     MAIN.@SCRATCH1
+022     @PSTRINGC7_640.@SCRATCH1
+023     @PRINTF_U_640.P1
+023-026 lcd_init.LCD_INIT_STRING
+023     MAIN.@SCRATCH2
+023     @PSTRINGC7_640.@SCRATCH2
+023     @PSTRINGCN7_640.@SCRATCH1
+024     @DIV88.P1
+024     @PSTRINGC7_640.@SCRATCH3
+024     @PSTRINGCN7_640.@SCRATCH2
+025     @DIV88.P1
+025     @PSTRINGC7_640.@SCRATCH4
+025     @PSTRINGCN7_640.@SCRATCH3
+026     lcd_putc.c
+026     @PSTRINGCN7_640.@SCRATCH4
+026     @DIV88.@SCRATCH1
+027     @delay_ms1.P1
+027     lcd_gotoxy.x
+027     lcd_init.@SCRATCH1
+028     lcd_gotoxy.y
+029     lcd_gotoxy.address
+02A     lcd_gotoxy.@SCRATCH1
+02B     lcd_send_byte.address
+02C     lcd_send_byte.n
+02D     lcd_read_byte.low
+02D     lcd_send_byte.@SCRATCH1
+02E     lcd_read_byte.high
+02E     lcd_send_nibble.n
+02F     lcd_read_byte.@SCRATCH1
+077     @SCRATCH
+078     @SCRATCH
+078     _RETURN_
+079     @SCRATCH
+07A     @SCRATCH
+086     lcdtris
+10D-10E @WRITE_PROGRAM_MEMORY8.P1
+10D-10E @READ_PROGRAM_MEMORY8.P2
+
+ROM Allocation:
+000004  @const657.call
+00000D  @const660.call
+000019  @const669.call
+000025  @const670.call
+000031  @const671.call
+00003E  @delay_ms1
+000053  lcd_send_nibble
+00005F  lcd_read_nibble
+000065  lcd_send_byte
+00006B  lcd_read_byte
+0000A5  lcd_init
+0000E3  lcd_gotoxy
+0000F5  lcd_putc
+000121  @PSTRINGC7_640
+000179  @PSTRINGCN7_640
+0001D0  @DIV88
+0001E5  @PRINTF_U_640
+00021A  MAIN
+00021A  @cinit1
+000224  @cinit2
+000318  @goto10656
+000324  @goto10691
+
+Project Directory:
+    C:\Users\Admin\Desktop\CCS_Github_\(33) Step Motor Uygulamasi\(2) CCS_C\
+
+Project Files:
+    CCS_C.c                                                 [05-Kas-21 22:34  CRC=87274E1B]
+    ..\..\..\..\..\..\Program Files (x86)\PICC\Devices\16f877.h [12-Kas-13 14:35  CRC=ADB5114D]
+    ..\..\..\..\..\..\Program Files (x86)\PICC\Drivers\lcd.c [19-Eyl-13 15:38  CRC=D1A6378A]
+
+Source signature=D828CE7C
+
+Units:
+    CCS_C (main)
+
+Compiler Settings:
+    Processor:      PIC16F877
+    Pointer Size:   16
+    ADC Range:      0-255
+    Opt Level:      9
+    Short,Int,Long: UNSIGNED: 1,8,16
+    Float,Double:   32,32
+
+Output Files:
+    XREF file:   CCS_C.xsym
+    Errors:      CCS_C.err
+    Ext Symbols: CCS_C.esym
+    INHX8:       CCS_C.hex
+    Symbols:     CCS_C.sym
+    List:        CCS_C.lst
+    Debug/COFF:  CCS_C.cof
+    Project:     CCS_C.ccspjt
+    Call Tree:   CCS_C.tre
+    Statistics:  CCS_C.STA

@@ -1,0 +1,204 @@
+CCS PCM C Compiler, Version 5.015, 5967               05-Kas-21 14:36
+
+               Filename:   C:\Users\Admin\Desktop\CCS_Github_\(31) PWM Uygulama\(2) CCS_C\CCS_C.lst
+
+               ROM used:   110 words (1%)
+                           Largest free fragment is 2048
+               RAM used:   6 (2%) at main() level
+                           7 (2%) worst case
+               Stack used: 1 locations
+               Stack size: 8
+
+*
+0000:  MOVLW  00
+0001:  MOVWF  0A
+0002:  GOTO   019
+0003:  NOP
+.................... #include <16f877.h>                                                    
+.................... //////////// Standard Header file for the PIC16F877 device //////////////// 
+.................... /////////////////////////////////////////////////////////////////////////// 
+.................... ////        (C) Copyright 1996, 2013 Custom Computer Services          //// 
+.................... //// This source code may only be used by licensed users of the CCS C  //// 
+.................... //// compiler.  This source code may only be distributed to other      //// 
+.................... //// licensed users of the CCS C compiler.  No other use, reproduction //// 
+.................... //// or distribution is permitted without written permission.          //// 
+.................... //// Derivative programs created using this software in object code    //// 
+.................... //// form are not restricted in any way.                               //// 
+.................... /////////////////////////////////////////////////////////////////////////// 
+.................... #device PIC16F877 
+....................  
+.................... #list 
+....................  
+.................... #fuses HS,NOWDT,NOPUT,NOLVP,NOCPD,NOPROTECT,NODEBUG,NOBROWNOUT,NOWRT       
+.................... #use delay (clock = 4000000)    
+0004:  MOVLW  21
+0005:  MOVWF  04
+0006:  BCF    03.7
+0007:  MOVF   00,W
+0008:  BTFSC  03.2
+0009:  GOTO   018
+000A:  MOVLW  01
+000B:  MOVWF  78
+000C:  CLRF   77
+000D:  DECFSZ 77,F
+000E:  GOTO   00D
+000F:  DECFSZ 78,F
+0010:  GOTO   00C
+0011:  MOVLW  4A
+0012:  MOVWF  77
+0013:  DECFSZ 77,F
+0014:  GOTO   013
+0015:  GOTO   016
+0016:  DECFSZ 00,F
+0017:  GOTO   00A
+0018:  RETURN
+....................  
+.................... #use fast_io(a) 
+.................... #use fast_io(c) 
+....................  
+.................... int i = 5; 
+....................  
+.................... void main(){ 
+0019:  MOVF   03,W
+001A:  ANDLW  1F
+001B:  MOVWF  03
+001C:  MOVLW  05
+001D:  MOVWF  20
+001E:  BSF    03.5
+001F:  BSF    1F.0
+0020:  BSF    1F.1
+0021:  BSF    1F.2
+0022:  BCF    1F.3
+0023:  BCF    03.7
+....................  
+....................    setup_psp(PSP_DISABLED); 
+0024:  BCF    09.4
+....................    setup_timer_1(T1_DISABLED);       
+0025:  BCF    03.5
+0026:  CLRF   10
+....................    //setup_timer_2(T2_DISABLED,0,1); 
+....................    setup_adc_ports(NO_ANALOGS); 
+0027:  BSF    03.5
+0028:  BSF    1F.0
+0029:  BSF    1F.1
+002A:  BSF    1F.2
+002B:  BCF    1F.3
+....................    setup_adc(ADC_OFF); 
+002C:  BCF    03.5
+002D:  BCF    1F.0
+....................   // setup_CCP1(CCP_OFF);     
+....................   // setup_CCP2(CCP_OFF); 
+....................     
+....................    set_tris_a(0x03); 
+002E:  MOVLW  03
+002F:  BSF    03.5
+0030:  MOVWF  05
+....................    set_tris_c(0x00); 
+0031:  MOVLW  00
+0032:  MOVWF  07
+....................     
+....................    output_c(0x00); 
+0033:  BCF    03.5
+0034:  CLRF   07
+....................     
+....................    setup_ccp1(CCP_PWM);             // CCP1 birimi PWM cikisi icin ayarlandi 
+0035:  BCF    07.2
+0036:  MOVLW  0C
+0037:  MOVWF  17
+....................    setup_ccp2(CCP_PWM);             // CCP2 birimi PWM cikisi icin ayarlandi 
+0038:  BCF    07.1
+0039:  MOVWF  1D
+....................     
+....................    setup_timer_2(T2_DIV_BY_16,170,1);     // Timer 2 ayarlari 
+003A:  MOVLW  00
+003B:  MOVWF  78
+003C:  IORLW  06
+003D:  MOVWF  12
+003E:  MOVLW  AA
+003F:  BSF    03.5
+0040:  MOVWF  12
+....................     
+....................    enable_interrupts(INT_CCP1); 
+0041:  BSF    0C.2
+....................    enable_interrupts(INT_CCP2); 
+0042:  BSF    0D.0
+....................    enable_interrupts(GLOBAL); 
+0043:  MOVLW  C0
+0044:  BCF    03.5
+0045:  IORWF  0B,F
+....................     
+....................    set_pwm1_duty(i);                // PWM1 cikisinin duty cycle belirleniyor 
+0046:  MOVF   20,W
+0047:  MOVWF  15
+....................    set_pwm2_duty(i);                // PWM2 cikisinin duty cycle belirleniyor 
+0048:  MOVF   20,W
+0049:  MOVWF  1B
+....................     
+....................    while(1){ 
+....................        
+....................       if(input(pin_a0)){ 
+004A:  BTFSS  05.0
+004B:  GOTO   059
+....................        
+....................          delay_ms(20); 
+004C:  MOVLW  14
+004D:  MOVWF  21
+004E:  CALL   004
+....................          while(input(pin_a0)); 
+004F:  BTFSC  05.0
+0050:  GOTO   04F
+....................          i+=3; 
+0051:  MOVLW  03
+0052:  ADDWF  20,F
+....................           
+....................          if(i >= 170) 
+0053:  MOVF   20,W
+0054:  SUBLW  A9
+0055:  BTFSC  03.0
+0056:  GOTO   059
+....................             i = 170; 
+0057:  MOVLW  AA
+0058:  MOVWF  20
+....................       } 
+....................        
+....................       if(input(pin_a1)){ 
+0059:  BTFSS  05.1
+005A:  GOTO   068
+....................        
+....................          delay_ms(20); 
+005B:  MOVLW  14
+005C:  MOVWF  21
+005D:  CALL   004
+....................          while(input(pin_a1)); 
+005E:  BTFSC  05.1
+005F:  GOTO   05E
+....................          i-=3; 
+0060:  MOVLW  03
+0061:  SUBWF  20,F
+....................           
+....................          if(i < 5) 
+0062:  MOVF   20,W
+0063:  SUBLW  04
+0064:  BTFSS  03.0
+0065:  GOTO   068
+....................             i = 5; 
+0066:  MOVLW  05
+0067:  MOVWF  20
+....................              
+....................       } 
+....................        
+....................        set_pwm1_duty(i); 
+0068:  MOVF   20,W
+0069:  MOVWF  15
+....................        set_pwm2_duty(i); 
+006A:  MOVF   20,W
+006B:  MOVWF  1B
+006C:  GOTO   04A
+....................        
+....................    } 
+....................   
+.................... } 
+006D:  SLEEP
+
+Configuration Fuses:
+   Word  1: 3F3A   HS NOWDT NOPUT NOBROWNOUT NOLVP NOCPD NOWRT NODEBUG NOPROTECT

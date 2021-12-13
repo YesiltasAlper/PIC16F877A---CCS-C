@@ -1,0 +1,130 @@
+CCS PCM C Compiler, Version 5.015, 5967               04-Kas-21 22:26
+
+               Filename:   C:\Users\Admin\Desktop\CCS_Github_\(27) - Kopya\(2) CCS_C\CCS_C.lst
+
+               ROM used:   64 words (1%)
+                           Largest free fragment is 2048
+               RAM used:   5 (1%) at main() level
+                           5 (1%) worst case
+               Stack used: 0 locations
+               Stack size: 8
+
+*
+0000:  MOVLW  00
+0001:  MOVWF  0A
+0002:  GOTO   004
+0003:  NOP
+.................... #include <16f877.h>                                 
+.................... //////////// Standard Header file for the PIC16F877 device //////////////// 
+.................... /////////////////////////////////////////////////////////////////////////// 
+.................... ////        (C) Copyright 1996, 2013 Custom Computer Services          //// 
+.................... //// This source code may only be used by licensed users of the CCS C  //// 
+.................... //// compiler.  This source code may only be distributed to other      //// 
+.................... //// licensed users of the CCS C compiler.  No other use, reproduction //// 
+.................... //// or distribution is permitted without written permission.          //// 
+.................... //// Derivative programs created using this software in object code    //// 
+.................... //// form are not restricted in any way.                               //// 
+.................... /////////////////////////////////////////////////////////////////////////// 
+.................... #device PIC16F877 
+....................  
+.................... #list 
+....................  
+.................... #use delay (clock = 4000000)                       
+.................... #fuses HS,WDT,NOPUT,NOLVP,NOCPD,NOPROTECT,NODEBUG,NOBROWNOUT,NOWRT      // NOWDT komutunu WDT komutuna çevirdik. 
+....................  
+.................... #use fast_io(a) 
+.................... #use fast_io(b) 
+....................  
+.................... void main() 
+0004:  MOVF   03,W
+0005:  ANDLW  1F
+0006:  MOVWF  03
+0007:  BSF    03.5
+0008:  BSF    1F.0
+0009:  BSF    1F.1
+000A:  BSF    1F.2
+000B:  BCF    1F.3
+000C:  BCF    03.7
+.................... { 
+....................    setup_psp(PSP_DISABLED); 
+000D:  BCF    09.4
+....................    setup_timer_1(T1_DISABLED);       
+000E:  BCF    03.5
+000F:  CLRF   10
+....................    setup_timer_2(T2_DISABLED,0,1); 
+0010:  MOVLW  00
+0011:  MOVWF  78
+0012:  MOVWF  12
+0013:  MOVLW  00
+0014:  BSF    03.5
+0015:  MOVWF  12
+....................    setup_adc_ports(NO_ANALOGS); 
+0016:  BSF    1F.0
+0017:  BSF    1F.1
+0018:  BSF    1F.2
+0019:  BCF    1F.3
+....................    setup_adc(ADC_OFF); 
+001A:  BCF    03.5
+001B:  BCF    1F.0
+....................    setup_CCP1(CCP_OFF); 
+001C:  MOVLW  F0
+001D:  ANDWF  17,F
+....................    setup_CCP2(CCP_OFF); 
+001E:  ANDWF  1D,F
+....................     
+....................    set_tris_a(0x01); 
+001F:  MOVLW  01
+0020:  BSF    03.5
+0021:  MOVWF  05
+....................    set_tris_b(0x00); 
+0022:  MOVLW  00
+0023:  MOVWF  06
+....................    output_b(0x00); 
+0024:  BCF    03.5
+0025:  CLRF   06
+....................   
+....................    setup_WDT(WDT_2304MS);           // WDT ayari yapiliyor (max 2304 ms) 
+0026:  MOVLW  0F
+0027:  MOVWF  77
+0028:  CLRF   01
+0029:  MOVLW  81
+002A:  MOVWF  04
+002B:  BCF    03.7
+002C:  MOVF   00,W
+002D:  ANDLW  F0
+002E:  IORLW  07
+002F:  MOVWF  00
+0030:  CLRWDT
+0031:  MOVF   00,W
+0032:  ANDLW  F7
+0033:  BTFSC  77.3
+0034:  ANDLW  F0
+0035:  IORWF  77,W
+0036:  MOVWF  00
+....................        
+....................    while(1){ 
+....................        
+....................       output_toggle(pin_b0);        // RBO cikis durumu tersleniyor 
+0037:  MOVLW  01
+0038:  XORWF  06,F
+....................        
+....................       while(input(pin_a0))           
+0039:  BTFSS  05.0
+003A:  GOTO   03D
+....................          restart_wdt();             // WDT'i sifirla 
+003B:  CLRWDT
+003C:  GOTO   039
+....................           
+....................       sleep();                      // Denetleyici uyku moduna aliniyor 
+003D:  SLEEP
+003E:  GOTO   037
+....................    } 
+....................   
+.................... } 
+....................  
+003F:  SLEEP
+.................... // Program basladiginda LED = 1 olur ve butona basildiginda denetleyici 2304 ms sonra uyku moduna gecer ve LED = 0 olur 
+.................... // Ardindan tekrar butona basilirsa denetleyici 2304 ms sonra uyku modundan cikar ve LED = 1 olur 
+
+Configuration Fuses:
+   Word  1: 3F3E   HS WDT NOPUT NOBROWNOUT NOLVP NOCPD NOWRT NODEBUG NOPROTECT

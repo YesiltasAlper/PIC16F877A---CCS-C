@@ -1,0 +1,189 @@
+CCS PCM C Compiler, Version 5.015, 5967               04-Kas-21 20:46
+
+               Filename:   C:\Users\Admin\Desktop\CCS_Github_\(24) Timer1 Uygulama (Timer)\(2) CCS_C\CCS_C.lst
+
+               ROM used:   115 words (1%)
+                           Largest free fragment is 2048
+               RAM used:   13 (4%) at main() level
+                           13 (4%) worst case
+               Stack used: 1 locations (0 in main + 1 for interrupts)
+               Stack size: 8
+
+*
+0000:  MOVLW  00
+0001:  MOVWF  0A
+0002:  GOTO   045
+0003:  NOP
+0004:  MOVWF  7F
+0005:  SWAPF  03,W
+0006:  CLRF   03
+0007:  MOVWF  21
+0008:  MOVF   0A,W
+0009:  MOVWF  20
+000A:  CLRF   0A
+000B:  MOVF   04,W
+000C:  MOVWF  22
+000D:  MOVF   77,W
+000E:  MOVWF  23
+000F:  MOVF   78,W
+0010:  MOVWF  24
+0011:  MOVF   79,W
+0012:  MOVWF  25
+0013:  MOVF   7A,W
+0014:  MOVWF  26
+0015:  BCF    03.7
+0016:  BCF    03.5
+0017:  MOVLW  8C
+0018:  MOVWF  04
+0019:  BTFSS  00.0
+001A:  GOTO   01D
+001B:  BTFSC  0C.0
+001C:  GOTO   02E
+001D:  MOVF   22,W
+001E:  MOVWF  04
+001F:  MOVF   23,W
+0020:  MOVWF  77
+0021:  MOVF   24,W
+0022:  MOVWF  78
+0023:  MOVF   25,W
+0024:  MOVWF  79
+0025:  MOVF   26,W
+0026:  MOVWF  7A
+0027:  MOVF   20,W
+0028:  MOVWF  0A
+0029:  SWAPF  21,W
+002A:  MOVWF  03
+002B:  SWAPF  7F,F
+002C:  SWAPF  7F,W
+002D:  RETFIE
+002E:  BCF    0A.3
+002F:  BCF    0A.4
+0030:  GOTO   031
+.................... #include <16f877.h>                                 
+.................... //////////// Standard Header file for the PIC16F877 device //////////////// 
+.................... /////////////////////////////////////////////////////////////////////////// 
+.................... ////        (C) Copyright 1996, 2013 Custom Computer Services          //// 
+.................... //// This source code may only be used by licensed users of the CCS C  //// 
+.................... //// compiler.  This source code may only be distributed to other      //// 
+.................... //// licensed users of the CCS C compiler.  No other use, reproduction //// 
+.................... //// or distribution is permitted without written permission.          //// 
+.................... //// Derivative programs created using this software in object code    //// 
+.................... //// form are not restricted in any way.                               //// 
+.................... /////////////////////////////////////////////////////////////////////////// 
+.................... #device PIC16F877 
+....................  
+.................... #list 
+....................  
+.................... #use delay (clock = 4000000)                        
+.................... #fuses HS,NOWDT,NOPUT,NOLVP,NOCPD,NOPROTECT,NODEBUG,NOBROWNOUT,NOWRT 
+....................  
+.................... #use fast_io(b) 
+....................  
+.................... int i = 0; 
+....................  
+.................... #int_timer1 
+.................... void timer1_kesme(){       // [Timer1 Eger timer        Kesme olusma suresi = Tkomut * (Bolme orani) * (65536 - Timer1 degeri) 
+....................                            //  olarak kullanilirsa]     Kesme olusma suresi = (10^-6 sn) * (4) * (65536- 60536) = 0.02 sn = 20 msn  
+....................    set_timer1(60536); 
+0031:  CLRF   0E
+0032:  MOVLW  EC
+0033:  MOVWF  0F
+0034:  MOVLW  78
+0035:  MOVWF  0E
+....................    i++; 
+0036:  INCF   27,F
+....................     
+....................    if(i == 100)            // (0.02 sn) * (100) = 2 sn 
+0037:  MOVF   27,W
+0038:  SUBLW  64
+0039:  BTFSC  03.2
+....................       output_high(pin_b0); 
+003A:  BSF    06.0
+....................     
+....................    if(i == 200){           // (0.02 sn) * (200 - 100) = 2 sn 
+003B:  MOVF   27,W
+003C:  SUBLW  C8
+003D:  BTFSS  03.2
+003E:  GOTO   041
+....................       output_low(pin_b0); 
+003F:  BCF    06.0
+....................       i = 0; 
+0040:  CLRF   27
+....................    } 
+....................        
+0041:  BCF    0C.0
+0042:  BCF    0A.3
+0043:  BCF    0A.4
+0044:  GOTO   01D
+.................... } 
+....................  
+.................... void main() 
+0045:  MOVF   03,W
+0046:  ANDLW  1F
+0047:  MOVWF  03
+0048:  CLRF   27
+0049:  BSF    03.5
+004A:  BSF    1F.0
+004B:  BSF    1F.1
+004C:  BSF    1F.2
+004D:  BCF    1F.3
+004E:  BCF    03.7
+.................... { 
+....................    setup_psp(PSP_DISABLED); 
+004F:  BCF    09.4
+....................  //setup_timer_1(T1_DISABLED);         Timer 1 kullandigimiz icin kaldirmaliyiz 
+....................    setup_timer_2(T2_DISABLED,0,1); 
+0050:  MOVLW  00
+0051:  MOVWF  78
+0052:  BCF    03.5
+0053:  MOVWF  12
+0054:  MOVLW  00
+0055:  BSF    03.5
+0056:  MOVWF  12
+....................    setup_adc_ports(NO_ANALOGS); 
+0057:  BSF    1F.0
+0058:  BSF    1F.1
+0059:  BSF    1F.2
+005A:  BCF    1F.3
+....................    setup_adc(ADC_OFF); 
+005B:  BCF    03.5
+005C:  BCF    1F.0
+....................    setup_CCP1(CCP_OFF); 
+005D:  MOVLW  F0
+005E:  ANDWF  17,F
+....................    setup_CCP2(CCP_OFF); 
+005F:  ANDWF  1D,F
+....................     
+....................    set_tris_b(0x00); 
+0060:  MOVLW  00
+0061:  BSF    03.5
+0062:  MOVWF  06
+....................    output_b(0x00); 
+0063:  BCF    03.5
+0064:  CLRF   06
+....................    
+....................    setup_timer_1(T1_INTERNAL | T1_DIV_BY_4); 
+0065:  MOVLW  A5
+0066:  MOVWF  10
+....................    set_timer1(60536); 
+0067:  CLRF   0E
+0068:  MOVLW  EC
+0069:  MOVWF  0F
+006A:  MOVLW  78
+006B:  MOVWF  0E
+....................     
+....................    enable_interrupts(INT_timer1); 
+006C:  BSF    03.5
+006D:  BSF    0C.0
+....................    enable_interrupts(GLOBAL); 
+006E:  MOVLW  C0
+006F:  BCF    03.5
+0070:  IORWF  0B,F
+....................     
+....................    while(1); 
+0071:  GOTO   071
+.................... } 
+0072:  SLEEP
+
+Configuration Fuses:
+   Word  1: 3F3A   HS NOWDT NOPUT NOBROWNOUT NOLVP NOCPD NOWRT NODEBUG NOPROTECT
