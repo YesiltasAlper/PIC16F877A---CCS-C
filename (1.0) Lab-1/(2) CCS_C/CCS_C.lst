@@ -1,0 +1,299 @@
+CCS PCM C Compiler, Version 5.015, 5967               04-Kas-21 14:40
+
+               Filename:   C:\Users\Admin\Desktop\CCS_Github_\(1) Lab-1\(2) CCS_C\CCS_C.lst
+
+               ROM used:   173 words (2%)
+                           Largest free fragment is 2048
+               RAM used:   6 (2%) at main() level
+                           18 (5%) worst case
+               Stack used: 1 locations
+               Stack size: 8
+
+*
+0000:  MOVLW  00
+0001:  MOVWF  0A
+0002:  GOTO   019
+0003:  NOP
+.................... #include <16f877.h>                                  
+.................... //////////// Standard Header file for the PIC16F877 device //////////////// 
+.................... /////////////////////////////////////////////////////////////////////////// 
+.................... ////        (C) Copyright 1996, 2013 Custom Computer Services          //// 
+.................... //// This source code may only be used by licensed users of the CCS C  //// 
+.................... //// compiler.  This source code may only be distributed to other      //// 
+.................... //// licensed users of the CCS C compiler.  No other use, reproduction //// 
+.................... //// or distribution is permitted without written permission.          //// 
+.................... //// Derivative programs created using this software in object code    //// 
+.................... //// form are not restricted in any way.                               //// 
+.................... /////////////////////////////////////////////////////////////////////////// 
+.................... #device PIC16F877 
+....................  
+.................... #list 
+....................  
+.................... #use delay (clock = 4000000)                        
+0004:  MOVLW  2D
+0005:  MOVWF  04
+0006:  BCF    03.7
+0007:  MOVF   00,W
+0008:  BTFSC  03.2
+0009:  GOTO   018
+000A:  MOVLW  01
+000B:  MOVWF  78
+000C:  CLRF   77
+000D:  DECFSZ 77,F
+000E:  GOTO   00D
+000F:  DECFSZ 78,F
+0010:  GOTO   00C
+0011:  MOVLW  4A
+0012:  MOVWF  77
+0013:  DECFSZ 77,F
+0014:  GOTO   013
+0015:  GOTO   016
+0016:  DECFSZ 00,F
+0017:  GOTO   00A
+0018:  RETURN
+.................... #fuses HS,NOWDT,NOPUT,NOLVP,NOCPD,NOPROTECT,NODEBUG,NOBROWNOUT,NOWRT  
+.................... #use fast_io(a) 
+.................... #use fast_io(b) 
+....................   
+.................... void main(){ 
+0019:  MOVF   03,W
+001A:  ANDLW  1F
+001B:  MOVWF  03
+001C:  BSF    03.5
+001D:  BSF    1F.0
+001E:  BSF    1F.1
+001F:  BSF    1F.2
+0020:  BCF    1F.3
+0021:  BCF    03.7
+....................  
+....................    setup_psp(PSP_DISABLED); 
+0022:  BCF    09.4
+....................    setup_timer_1(T1_DISABLED); 
+0023:  BCF    03.5
+0024:  CLRF   10
+....................    setup_timer_2(T2_DISABLED,0,1); 
+0025:  MOVLW  00
+0026:  MOVWF  78
+0027:  MOVWF  12
+0028:  MOVLW  00
+0029:  BSF    03.5
+002A:  MOVWF  12
+....................    setup_adc_ports(NO_ANALOGS); 
+002B:  BSF    1F.0
+002C:  BSF    1F.1
+002D:  BSF    1F.2
+002E:  BCF    1F.3
+....................    setup_adc(ADC_OFF); 
+002F:  BCF    03.5
+0030:  BCF    1F.0
+....................    setup_CCP1(CCP_OFF); 
+0031:  MOVLW  F0
+0032:  ANDWF  17,F
+....................    setup_CCP2(CCP_OFF); 
+0033:  ANDWF  1D,F
+....................     
+....................    set_tris_a(0x07);                             // A portunun ilk 2 pini giris olarak ayarlandi A0 ve A1 pini 
+0034:  MOVLW  07
+0035:  BSF    03.5
+0036:  MOVWF  05
+....................    set_tris_b(0x00);                             // B portunun tumu cikis olarak ayarlandi    
+0037:  MOVLW  00
+0038:  MOVWF  06
+....................    output_b(0x00); 
+0039:  BCF    03.5
+003A:  CLRF   06
+....................     
+....................    while(TRUE){ 
+....................   
+....................       if(input(pin_a0) == 1){                    // Yuruyen isik 
+003B:  BTFSS  05.0
+003C:  GOTO   060
+....................        
+....................          output_b(0x00); 
+003D:  CLRF   06
+....................          int x = 1,y=64; 
+003E:  MOVLW  01
+003F:  MOVWF  21
+0040:  MOVLW  40
+0041:  MOVWF  22
+....................     
+....................          for(int i=0; i<8; i++){ 
+0042:  CLRF   23
+0043:  MOVF   23,W
+0044:  SUBLW  07
+0045:  BTFSS  03.0
+0046:  GOTO   050
+....................           
+....................             output_b(x); 
+0047:  MOVF   21,W
+0048:  MOVWF  06
+....................             delay_ms(250); 
+0049:  MOVLW  FA
+004A:  MOVWF  2D
+004B:  CALL   004
+....................             x = x * 2; 
+004C:  BCF    03.0
+004D:  RLF    21,F
+004E:  INCF   23,F
+004F:  GOTO   043
+....................          } 
+....................        
+....................          for(int j=0; j<7; j++){ 
+0050:  CLRF   24
+0051:  MOVF   24,W
+0052:  SUBLW  06
+0053:  BTFSS  03.0
+0054:  GOTO   05E
+....................           
+....................             output_b(y); 
+0055:  MOVF   22,W
+0056:  MOVWF  06
+....................             delay_ms(250); 
+0057:  MOVLW  FA
+0058:  MOVWF  2D
+0059:  CALL   004
+....................             y = y / 2; 
+005A:  BCF    03.0
+005B:  RRF    22,F
+005C:  INCF   24,F
+005D:  GOTO   051
+....................          } 
+....................        
+....................          output_b(0x00); 
+005E:  CLRF   06
+....................       } 
+005F:  GOTO   0AB
+....................    
+....................    
+....................       else if(input(pin_a1) == 1){              // Kara simsek  
+0060:  BTFSS  05.1
+0061:  GOTO   085
+....................        
+....................          output_b(0x00); 
+0062:  CLRF   06
+....................          int a = 3,b=96; 
+0063:  MOVLW  03
+0064:  MOVWF  25
+0065:  MOVLW  60
+0066:  MOVWF  26
+....................        
+....................          for(int i=0; i<7; i++){ 
+0067:  CLRF   27
+0068:  MOVF   27,W
+0069:  SUBLW  06
+006A:  BTFSS  03.0
+006B:  GOTO   075
+....................           
+....................             output_b(a); 
+006C:  MOVF   25,W
+006D:  MOVWF  06
+....................             delay_ms(250); 
+006E:  MOVLW  FA
+006F:  MOVWF  2D
+0070:  CALL   004
+....................             a = a * 2; 
+0071:  BCF    03.0
+0072:  RLF    25,F
+0073:  INCF   27,F
+0074:  GOTO   068
+....................          } 
+....................        
+....................          for(int j=0; j<6; j++){ 
+0075:  CLRF   28
+0076:  MOVF   28,W
+0077:  SUBLW  05
+0078:  BTFSS  03.0
+0079:  GOTO   083
+....................           
+....................             output_b(b); 
+007A:  MOVF   26,W
+007B:  MOVWF  06
+....................             delay_ms(250); 
+007C:  MOVLW  FA
+007D:  MOVWF  2D
+007E:  CALL   004
+....................             b = b / 2; 
+007F:  BCF    03.0
+0080:  RRF    26,F
+0081:  INCF   28,F
+0082:  GOTO   076
+....................          } 
+....................           
+....................          output_b(0x00); 
+0083:  CLRF   06
+....................       } 
+0084:  GOTO   0AB
+....................     
+....................     
+....................       else if(input(pin_a2) == 1){              // Binary sayici 
+0085:  BTFSS  05.2
+0086:  GOTO   0AB
+....................           
+....................          output_b(0x00); 
+0087:  CLRF   06
+....................          int c = 1,d=127; 
+0088:  MOVLW  01
+0089:  MOVWF  29
+008A:  MOVLW  7F
+008B:  MOVWF  2A
+....................        
+....................          for(int i=0; i<8; i++){ 
+008C:  CLRF   2B
+008D:  MOVF   2B,W
+008E:  SUBLW  07
+008F:  BTFSS  03.0
+0090:  GOTO   09C
+....................           
+....................             output_b(c); 
+0091:  MOVF   29,W
+0092:  MOVWF  06
+....................             delay_ms(250); 
+0093:  MOVLW  FA
+0094:  MOVWF  2D
+0095:  CALL   004
+....................             c = (c * 2) + 1; 
+0096:  BCF    03.0
+0097:  RLF    29,W
+0098:  ADDLW  01
+0099:  MOVWF  29
+009A:  INCF   2B,F
+009B:  GOTO   08D
+....................          } 
+....................        
+....................          for(int j=0; j<7; j++){ 
+009C:  CLRF   2C
+009D:  MOVF   2C,W
+009E:  SUBLW  06
+009F:  BTFSS  03.0
+00A0:  GOTO   0AA
+....................           
+....................             output_b(d); 
+00A1:  MOVF   2A,W
+00A2:  MOVWF  06
+....................             delay_ms(250); 
+00A3:  MOVLW  FA
+00A4:  MOVWF  2D
+00A5:  CALL   004
+....................             d = d / 2; 
+00A6:  BCF    03.0
+00A7:  RRF    2A,F
+00A8:  INCF   2C,F
+00A9:  GOTO   09D
+....................          } 
+....................           
+....................       output_b(0x00); 
+00AA:  CLRF   06
+....................       } 
+00AB:  GOTO   03B
+....................   } 
+....................    
+.................... } 
+....................  
+00AC:  SLEEP
+....................  
+....................  
+....................  
+....................  
+
+Configuration Fuses:
+   Word  1: 3F3A   HS NOWDT NOPUT NOBROWNOUT NOLVP NOCPD NOWRT NODEBUG NOPROTECT
