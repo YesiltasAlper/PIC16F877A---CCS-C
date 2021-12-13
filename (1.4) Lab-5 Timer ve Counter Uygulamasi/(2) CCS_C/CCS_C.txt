@@ -1,0 +1,70 @@
+#include <16f877.h>                                // İlk önce hangi mikrodenetleyiciyi kullanıyorsak onun kütüphanesi dahil edilir.
+#use delay (clock = 4000000)                       // Daha sonra kaç MHz osilatör kullanıyorsak onu tanıtıyoruz.
+#fuses HS,NOWDT,NOPUT,NOLVP,NOCPD,NOPROTECT,NODEBUG,NOBROWNOUT,NOWRT
+
+#use fast_io(a)
+#use fast_io(b)
+
+int sayici = 0,zamanlayici = 0;
+
+#int_timer0 // SAYICI KULLANILIYOR
+void timer0_kesme(){
+
+  set_timer0(255);
+  sayici++;
+}
+
+#int_timer1 // ZAMANLAYİCİ KULLANILIYOR
+void timer1_kesme(){
+
+   set_timer1(63036);
+   zamanlayici++;
+   
+   if(sayici == 1 && zamanlayici >= 200){ // Burada kullanıcıya 4 sn süre verildi butona 2. kez basması için yoksa resetlenecek
+      sayici = 0;
+      output_high(pin_b1);
+      zamanlayici = 0;
+   }
+   
+   if(sayici == 2 && zamanlayici < 500){ // Butona toplam 4 kez basıldıysa ve 10 saniye zaman geçmemişse.Simülasyona fazla takılma
+      output_high(pin_b0);
+      output_low(pin_b1);                    
+      
+      if(zamanlayici == 500){    // 500 DEMEK 10 SANİYEYE TEKABUL EDER Yani 500 oldugunda ledi söndür değişkenleri sıfırla.
+          output_low(pin_b0);
+          zamanlayici = 0;
+          sayici = 0;
+          break;
+      }
+   
+   }
+      
+}
+
+void main()
+{
+   setup_psp(PSP_DISABLED);
+  // setup_timer_1(T1_DISABLED);      
+   setup_timer_2(T2_DISABLED,0,1);
+   setup_adc_ports(NO_ANALOGS);
+   setup_adc(ADC_OFF);
+   setup_CCP1(CCP_OFF);
+   setup_CCP2(CCP_OFF);
+   
+   set_tris_a(0x10);
+   set_tris_b(0x00);
+   output_b(0x00);
+ 
+   setup_timer_0(RTCC_EXT_H_TO_L | RTCC_DIV_1); // HER 1 BASMADA KESMEYE GİDER (1x1)
+   set_timer0(255);
+   
+   setup_timer_1(T1_INTERNAL | T1_DIV_BY_8);  // HER 0.02 SANİYEDE KESMEYE GİDER (8x2500x10^-6)
+   set_timer1(63036);
+   
+   enable_interrupts(INT_timer0);
+   enable_interrupts(INT_timer1);
+   enable_interrupts(GLOBAL);
+   
+   while(1);
+ 
+}

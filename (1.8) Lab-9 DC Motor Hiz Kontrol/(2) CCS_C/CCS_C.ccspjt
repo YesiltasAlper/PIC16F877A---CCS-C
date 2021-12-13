@@ -1,0 +1,16 @@
+[PROJECT]
+Target=CCS_C.hex
+Processor_Text=PIC16F877
+CCSVersion=5.015
+Compiler=PCM
+[Target Data]
+FileList=CCS_C.c
+[Directories]
+Include=C:\Program Files (x86)\PICC\Devices\;C:\Program Files (x86)\PICC\Drivers\
+[CCS_C.c]
+Type=4
+[mru-list]
+1=CCS_C.c
+[Units]
+Count=1
+1=CCS_C (main)

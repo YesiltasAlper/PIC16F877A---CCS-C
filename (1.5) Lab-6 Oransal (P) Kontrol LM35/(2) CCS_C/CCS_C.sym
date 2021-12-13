@@ -1,0 +1,168 @@
+004-005 @READ_PROGRAM_MEMORY8.P1
+004-005 @WRITE_PROGRAM_MEMORY8.P2
+006     lcd
+006     lcdlat
+008     PSP_DATA
+015     CCP_1_LOW
+015     CCP_1
+016     CCP_1_HIGH
+01B     CCP_2_LOW
+01B     CCP_2
+01C     CCP_2_HIGH
+020-021 adc_pot
+022-023 adc_lm35
+024-027 sicaklik
+028-02B hata
+02C-02F referans
+030     kp
+031     duty
+032-035 @DIVFF.P1
+032-035 @SFTOI.P2
+032-035 @ADDFF.P3
+032-033 @ITOF.P4
+032-035 @PRINTF_L32D_640FPFPF.P5
+032     @PRINTF_D_640.P6
+032     lcd_init.i
+032     @PSTRINGCN7_640.P1
+032-035 @FLT.P2
+033-036 lcd_init.LCD_INIT_STRING
+033     @PRINTF_D_640.P1
+033     @PSTRINGCN7_640.@SCRATCH1
+034     @PSTRINGCN7_640.@SCRATCH2
+034     @PRINTF_D_640.@SCRATCH1
+035     @PSTRINGCN7_640.@SCRATCH3
+035     @PRINTF_D_640.@SCRATCH2
+036     @PRINTF_L32D_640FPFPF.P1
+036-039 @FLT.P2
+036-039 @DIVFF.P3
+036-039 @ADDFF.P4
+036     @PSTRINGCN7_640.@SCRATCH4
+036     @PRINTF_D_640.@SCRATCH3
+037     lcd_init.@SCRATCH1
+037     @PRINTF_L32D_640FPFPF.@SCRATCH1
+037     @PRINTF_D_640.@SCRATCH4
+038     @DIV88.P1
+038     @PRINTF_L32D_640FPFPF.@SCRATCH2
+039     @DIV88.P1
+039     @PRINTF_L32D_640FPFPF.@SCRATCH3
+03A     @DIVFF.@SCRATCH1
+03A     @PRINTF_L32D_640FPFPF.@SCRATCH4
+03A     @ADDFF.@SCRATCH1
+03A     @FLT.@SCRATCH1
+03A     @DIV88.@SCRATCH1
+03B     @DIVFF.@SCRATCH2
+03B     @PRINTF_L32D_640FPFPF.@SCRATCH5
+03B     @ADDFF.@SCRATCH2
+03B     @FLT.@SCRATCH2
+03C     @DIVFF.@SCRATCH3
+03C     @PRINTF_L32D_640FPFPF.@SCRATCH6
+03C     @ADDFF.@SCRATCH3
+03D     @DIVFF.@SCRATCH4
+03D     @PRINTF_L32D_640FPFPF.@SCRATCH7
+03D     @ADDFF.@SCRATCH4
+03E     @DIVFF.@SCRATCH5
+03E     @PRINTF_L32D_640FPFPF.@SCRATCH8
+03E     @ADDFF.@SCRATCH5
+03F-042 @FTOSD.P1
+03F-042 @DIV3232.P2
+03F     lcd_putc.c
+03F-042 @MULFF.P1
+03F     @DIVFF.@SCRATCH6
+03F     @ADDFF.@SCRATCH6
+040     @delay_ms1.P1
+040     lcd_gotoxy.x
+040     @ADDFF.@SCRATCH7
+041     lcd_gotoxy.y
+041     @ADDFF.@SCRATCH8
+042     lcd_gotoxy.address
+043-046 @DIV3232.P1
+043-046 @MULFF.P2
+043     lcd_gotoxy.@SCRATCH1
+043     @FTOSD.@SCRATCH1
+044     lcd_send_byte.address
+045     lcd_send_byte.n
+046     lcd_read_byte.low
+046     lcd_send_byte.@SCRATCH1
+047     lcd_send_nibble.n
+047     lcd_read_byte.high
+047     @MULFF.@SCRATCH1
+047     @DIV3232.@SCRATCH1
+048     lcd_read_byte.@SCRATCH1
+048     @MULFF.@SCRATCH2
+048     @DIV3232.@SCRATCH2
+049     @MULFF.@SCRATCH3
+049     @DIV3232.@SCRATCH3
+04A     @MULFF.@SCRATCH4
+04A     @DIV3232.@SCRATCH4
+04B     @MULFF.@SCRATCH5
+04B     @DIV3232.@SCRATCH5
+077     @SCRATCH
+078     @SCRATCH
+078     _RETURN_
+079     @SCRATCH
+07A     @SCRATCH
+086     lcdtris
+10D-10E @WRITE_PROGRAM_MEMORY8.P1
+10D-10E @READ_PROGRAM_MEMORY8.P2
+
+ROM Allocation:
+000004  @const667.call
+000009  @const681.call
+00000E  @const685.call
+000013  @const691.call
+000017  @delay_ms1
+00002C  lcd_send_nibble
+000038  lcd_read_nibble
+00003E  lcd_send_byte
+000044  lcd_read_byte
+00007E  lcd_init
+0000BC  @ITOF
+0000D9  @DIVFF
+0001A5  lcd_gotoxy
+0001B7  lcd_putc
+0001E3  @PSTRINGCN7_640
+00023A  @MULFF
+0002AF  @DIV3232
+0002FE  @PRINTF_L32D_640FPFPF
+000325  @FTOSD
+0003DE  @ADDFF
+000521  @SFTOI
+000540  @FLT
+00057F  @DIV88
+000594  @PRINTF_D_640
+0005ED  MAIN
+0005ED  @cinit1
+0005F8  @cinit2
+
+Project Directory:
+    C:\Users\Admin\Desktop\CCS_Github_\(6) Lab -6 Oransal (P) Kontrol LM35\(2) CCS_C\
+
+Project Files:
+    CCS_C.c                                                 [10-Ara-21 17:28  CRC=BFBCA097]
+    ..\..\..\..\..\..\Program Files (x86)\PICC\Devices\16f877.h [12-Kas-13 14:35  CRC=ADB5114D]
+    ..\..\..\..\..\..\Program Files (x86)\PICC\Drivers\lcd.c [19-Eyl-13 15:38  CRC=D1A6378A]
+
+Source signature=10BE20F8
+
+Units:
+    CCS_C (main)
+
+Compiler Settings:
+    Processor:      PIC16F877
+    Pointer Size:   16
+    ADC Range:      0-1023
+    Opt Level:      9
+    Short,Int,Long: UNSIGNED: 1,8,16
+    Float,Double:   32,32
+
+Output Files:
+    XREF file:   CCS_C.xsym
+    Errors:      CCS_C.err
+    Ext Symbols: CCS_C.esym
+    INHX8:       CCS_C.hex
+    Symbols:     CCS_C.sym
+    List:        CCS_C.lst
+    Debug/COFF:  CCS_C.cof
+    Project:     CCS_C.ccspjt
+    Call Tree:   CCS_C.tre
+    Statistics:  CCS_C.STA

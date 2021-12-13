@@ -1,0 +1,141 @@
+#include <16f877.h> 
+#use delay (clock = 4000000)    
+#fuses HS,NOWDT,NOPUT,NOLVP,NOCPD,NOPROTECT,NODEBUG,NOBROWNOUT,NOWRT
+
+#use fast_io(b)
+
+unsigned int sayac1 = 0,sayac2 = 0,sayac3 = 0,sayac4 = 0;
+unsigned int duty1 = 0,duty2 = 0,duty3 = 0, duty4 = 0;
+unsigned int adim1 = 0,adim2 = 0,adim3 = 0,adim4 = 0;
+unsigned int16 gecikme1 = 0,gecikme2 = 0,gecikme3 = 0,gecikme4 = 0;
+const unsigned int servo_derece[] = {5,10,11,12,13,14,15,16,17,18,19,20};
+
+void servo_1(){
+
+   if(sayac1 >= duty1)
+      output_low(pin_b0);
+  
+   sayac1++;
+      
+    if(sayac1 == 200)
+      sayac1 = 0;
+      
+    gecikme1++;
+    
+    if(gecikme1 > 10000){
+      gecikme1 = 0;
+      adim1++;
+      
+    if(adim1 == 12)
+      adim1 = 0;
+     }
+}
+
+void servo_2(){
+
+   if(sayac2 >= duty2)
+      output_low(pin_b1);
+  
+   sayac2++;
+      
+    if(sayac2 == 200)
+      sayac2 = 0;
+      
+    gecikme2++;
+    
+    if(gecikme2 > 10000){
+      gecikme2 = 0;
+      adim2++;
+      
+    if(adim2 == 12)
+      adim2 = 0;
+     }
+}
+
+void servo_3(){
+
+   if(sayac3 >= duty3)
+      output_low(pin_b2);
+  
+   sayac3++;
+      
+    if(sayac3 == 200)
+      sayac3 = 0;
+      
+    gecikme3++;
+    
+    if(gecikme3 > 10000){
+      gecikme3 = 0;
+      adim3++;
+      
+    if(adim3 == 12)
+      adim3 = 0;
+     }
+}
+
+void servo_4(){
+
+   if(sayac4 >= duty4)
+      output_low(pin_b3);
+  
+   sayac4++;
+      
+    if(sayac4 == 200)
+      sayac4 = 0;
+      
+    gecikme4++;
+    
+    if(gecikme4 > 10000){
+      gecikme4 = 0;
+      adim4++;
+      
+    if(adim4 == 12)
+      adim4 = 0;
+     }
+}
+
+
+#int_timer0
+void timer0_kesme(){
+   
+   set_timer0(231);
+   
+   if((sayac1 == 0) && (sayac2 == 0) && (sayac3 == 0) && (sayac4 == 0)){
+      output_high(pin_b0);
+      output_high(pin_b1);
+      output_high(pin_b2);
+      output_high(pin_b3);
+   }
+   
+   servo_1();
+   servo_2();
+   servo_3();
+   servo_4();
+}
+
+void main(){
+
+   setup_psp(PSP_DISABLED);
+   setup_timer_1(T1_DISABLED);  
+   setup_CCP2(CCP_OFF);
+   setup_timer_2(T2_DISABLED,0,1);
+   setup_adc_ports(NO_ANALOGS);
+   setup_adc(ADC_OFF);
+   setup_CCP1(CCP_OFF);
+   
+   set_tris_b(0x00);
+   
+   setup_timer_0(RTCC_INTERNAL | RTCC_DIV_4);
+   set_timer0(231);
+      
+   enable_interrupts(INT_timer0);
+   enable_interrupts(GLOBAL);
+   
+   while(1){
+      duty1 = servo_derece[adim1];
+      duty2 = servo_derece[adim2];
+      duty3 = servo_derece[adim3];
+      duty4 = servo_derece[adim4];
+   }
+   
+}

@@ -1,0 +1,159 @@
+004-005 @READ_PROGRAM_MEMORY8.P1
+004-005 @WRITE_PROGRAM_MEMORY8.P2
+006     lcd
+006     lcdlat
+008     PSP_DATA
+015     CCP_1
+015     CCP_1_LOW
+016     CCP_1_HIGH
+01B     CCP_2_LOW
+01B     CCP_2
+01C     CCP_2_HIGH
+020-021 adc_pot
+022-023 adc_lm35
+024-027 sicaklik
+028-02B hata
+02C-02F Ehata
+030-033 referans
+034-037 integral
+038-03B t_integral
+03C-03F Ki
+040     Kp
+041-044 DGM
+045     lcd_init.i
+045-046 @ITOF.P1
+045-048 @PRINTF_L32D_640FPFPF.P2
+045-048 @FLT.P3
+045     MAIN.@SCRATCH1
+045     @PSTRINGC7_640.@SCRATCH1
+046-049 lcd_init.LCD_INIT_STRING
+046     MAIN.@SCRATCH2
+046     @PSTRINGC7_640.@SCRATCH2
+047     MAIN.@SCRATCH3
+047     @PSTRINGC7_640.@SCRATCH3
+048     MAIN.@SCRATCH4
+048     @PSTRINGC7_640.@SCRATCH4
+049-04C @ADDFF.P1
+049-04C @DIVFF.P2
+049     @PRINTF_L32D_640FPFPF.P3
+049-04C @FLT.P4
+04A     lcd_init.@SCRATCH1
+04A     @PRINTF_L32D_640FPFPF.@SCRATCH1
+04B     @PRINTF_L32D_640FPFPF.@SCRATCH2
+04C     @PRINTF_L32D_640FPFPF.@SCRATCH3
+04D-050 @ADDFF.P1
+04D-050 @DIVFF.P2
+04D     @PRINTF_L32D_640FPFPF.@SCRATCH4
+04D     @FLT.@SCRATCH1
+04E     @PRINTF_L32D_640FPFPF.@SCRATCH5
+04E     @FLT.@SCRATCH2
+04F     @PRINTF_L32D_640FPFPF.@SCRATCH6
+050     @PRINTF_L32D_640FPFPF.@SCRATCH7
+051     @DIVFF.@SCRATCH1
+051     @PRINTF_L32D_640FPFPF.@SCRATCH8
+051     @ADDFF.@SCRATCH1
+052-055 @FTOSD.P1
+052-055 @DIV3232.P2
+052     lcd_putc.c
+052-055 @MULFF.P1
+052     @DIVFF.@SCRATCH2
+052     @ADDFF.@SCRATCH2
+053     @delay_ms1.P1
+053     lcd_gotoxy.x
+053     @DIVFF.@SCRATCH3
+053     @ADDFF.@SCRATCH3
+054     lcd_gotoxy.y
+054     @DIVFF.@SCRATCH4
+054     @ADDFF.@SCRATCH4
+055     lcd_gotoxy.address
+055     @DIVFF.@SCRATCH5
+055     @ADDFF.@SCRATCH5
+056-059 @MULFF.P1
+056-059 @DIV3232.P2
+056     lcd_gotoxy.@SCRATCH1
+056     @DIVFF.@SCRATCH6
+056     @FTOSD.@SCRATCH1
+056     @ADDFF.@SCRATCH6
+057     lcd_send_byte.address
+057     @ADDFF.@SCRATCH7
+058     lcd_send_byte.n
+058     @ADDFF.@SCRATCH8
+059     lcd_read_byte.low
+059     lcd_send_byte.@SCRATCH1
+05A     lcd_read_byte.high
+05A     lcd_send_nibble.n
+05A     @MULFF.@SCRATCH1
+05A     @DIV3232.@SCRATCH1
+05B     lcd_read_byte.@SCRATCH1
+05B     @MULFF.@SCRATCH2
+05B     @DIV3232.@SCRATCH2
+05C     @MULFF.@SCRATCH3
+05C     @DIV3232.@SCRATCH3
+05D     @MULFF.@SCRATCH4
+05D     @DIV3232.@SCRATCH4
+05E     @MULFF.@SCRATCH5
+05E     @DIV3232.@SCRATCH5
+077     @SCRATCH
+078     @SCRATCH
+078     _RETURN_
+079     @SCRATCH
+07A     @SCRATCH
+086     lcdtris
+10D-10E @WRITE_PROGRAM_MEMORY8.P1
+10D-10E @READ_PROGRAM_MEMORY8.P2
+
+ROM Allocation:
+000004  @const688.call
+000007  @delay_ms1
+00001C  lcd_send_nibble
+000028  lcd_read_nibble
+00002E  lcd_send_byte
+000034  lcd_read_byte
+00006E  lcd_init
+0000AC  @ITOF
+0000C9  @DIVFF
+000193  lcd_gotoxy
+0001A5  lcd_putc
+0001D1  @MULFF
+000246  @DIV3232
+000295  @PRINTF_L32D_640FPFPF
+0002BC  @FTOSD
+000375  @ADDFF
+0004B6  @PSTRINGC7_640
+00050E  @FLT
+00054D  MAIN
+00054D  @cinit1
+000567  @cinit2
+
+Project Directory:
+    C:\Users\Admin\Desktop\CCS_Github_\(7) Lab -7 PI Kontrol LM35\(2) CCS_C\
+
+Project Files:
+    CCS_C.c                                                 [10-Ara-21 18:02  CRC=024512E7]
+    ..\..\..\..\..\..\Program Files (x86)\PICC\Devices\16f877.h [12-Kas-13 14:35  CRC=ADB5114D]
+    ..\..\..\..\..\..\Program Files (x86)\PICC\Drivers\lcd.c [19-Eyl-13 15:38  CRC=D1A6378A]
+
+Source signature=53469348
+
+Units:
+    CCS_C (main)
+
+Compiler Settings:
+    Processor:      PIC16F877
+    Pointer Size:   16
+    ADC Range:      0-1023
+    Opt Level:      9
+    Short,Int,Long: UNSIGNED: 1,8,16
+    Float,Double:   32,32
+
+Output Files:
+    XREF file:   CCS_C.xsym
+    Errors:      CCS_C.err
+    Ext Symbols: CCS_C.esym
+    INHX8:       CCS_C.hex
+    Symbols:     CCS_C.sym
+    List:        CCS_C.lst
+    Debug/COFF:  CCS_C.cof
+    Project:     CCS_C.ccspjt
+    Call Tree:   CCS_C.tre
+    Statistics:  CCS_C.STA

@@ -1,0 +1,74 @@
+004-005 @READ_PROGRAM_MEMORY8.P1
+004-005 @WRITE_PROGRAM_MEMORY8.P2
+008     PSP_DATA
+015     CCP_1_LOW
+015     CCP_1
+016     CCP_1_HIGH
+01B     CCP_2_LOW
+01B     CCP_2
+01C     CCP_2_HIGH
+021-022 main.sayi
+023-024 main.mod1000
+025     main.binler
+026     main.onlar
+027     main.yuzler
+028     main.birler
+029     main.mod100
+02A     main.mod10
+02B     @DIV88.P1
+02B     @delay_ms1.P2
+02B-02C @DIV1616.P3
+02B     main.@SCRATCH1
+02C     @DIV88.P1
+02D-02E @DIV1616.P1
+02D     @DIV88.@SCRATCH1
+02F     @DIV1616.@SCRATCH1
+077     @SCRATCH
+078     @SCRATCH
+078     _RETURN_
+079     @SCRATCH
+07A     @SCRATCH
+10D-10E @READ_PROGRAM_MEMORY8.P1
+10D-10E @WRITE_PROGRAM_MEMORY8.P2
+
+ROM Allocation:
+000004  a.call
+000008  a.data
+000012  @delay_ms1
+000027  @DIV1616
+00004C  @DIV88
+000061  main
+000061  @cinit1
+000069  @cinit2
+
+Project Directory:
+    C:\Users\Admin\Desktop\CCS_Github_\(2) Lab-2 5000-0 Sayici\(2) CCS_C\
+
+Project Files:
+    CCS_C.c                                                 [04-Kas-21 14:47  CRC=D5CA9E48]
+    ..\..\..\..\..\..\Program Files (x86)\PICC\Devices\16f877.h [12-Kas-13 14:35  CRC=ADB5114D]
+
+Source signature=3134C0E2
+
+Units:
+    CCS_C (main)
+
+Compiler Settings:
+    Processor:      PIC16F877
+    Pointer Size:   16
+    ADC Range:      0-255
+    Opt Level:      9
+    Short,Int,Long: UNSIGNED: 1,8,16
+    Float,Double:   32,32
+
+Output Files:
+    XREF file:   CCS_C.xsym
+    Errors:      CCS_C.err
+    Ext Symbols: CCS_C.esym
+    INHX8:       CCS_C.hex
+    Symbols:     CCS_C.sym
+    List:        CCS_C.lst
+    Debug/COFF:  CCS_C.cof
+    Project:     CCS_C.ccspjt
+    Call Tree:   CCS_C.tre
+    Statistics:  CCS_C.STA

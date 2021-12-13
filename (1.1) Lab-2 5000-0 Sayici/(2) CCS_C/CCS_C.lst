@@ -1,0 +1,530 @@
+CCS PCM C Compiler, Version 5.015, 5967               04-Kas-21 14:47
+
+               Filename:   C:\Users\Admin\Desktop\CCS_Github_\(2) Lab-2 5000-0 Sayici\(2) CCS_C\CCS_C.lst
+
+               ROM used:   397 words (5%)
+                           Largest free fragment is 2048
+               RAM used:   6 (2%) at main() level
+                           20 (5%) worst case
+               Stack used: 1 locations
+               Stack size: 8
+
+*
+0000:  MOVLW  00
+0001:  MOVWF  0A
+0002:  GOTO   061
+0003:  NOP
+.................... #include <16f877.h>                                 
+.................... //////////// Standard Header file for the PIC16F877 device //////////////// 
+.................... /////////////////////////////////////////////////////////////////////////// 
+.................... ////        (C) Copyright 1996, 2013 Custom Computer Services          //// 
+.................... //// This source code may only be used by licensed users of the CCS C  //// 
+.................... //// compiler.  This source code may only be distributed to other      //// 
+.................... //// licensed users of the CCS C compiler.  No other use, reproduction //// 
+.................... //// or distribution is permitted without written permission.          //// 
+.................... //// Derivative programs created using this software in object code    //// 
+.................... //// form are not restricted in any way.                               //// 
+.................... /////////////////////////////////////////////////////////////////////////// 
+.................... #device PIC16F877 
+0004:  BCF    0A.0
+0005:  BCF    0A.1
+0006:  BCF    0A.2
+0007:  ADDWF  02,F
+0008:  RETLW  00
+0009:  RETLW  01
+000A:  RETLW  02
+000B:  RETLW  03
+000C:  RETLW  04
+000D:  RETLW  05
+000E:  RETLW  06
+000F:  RETLW  07
+0010:  RETLW  08
+0011:  RETLW  09
+*
+0027:  CLRF   78
+0028:  CLRF   79
+0029:  CLRF   77
+002A:  CLRF   7A
+002B:  MOVF   2E,W
+002C:  BTFSS  03.2
+002D:  GOTO   031
+002E:  MOVF   2D,W
+002F:  BTFSC  03.2
+0030:  GOTO   04B
+0031:  MOVLW  10
+0032:  MOVWF  2F
+0033:  BCF    03.0
+0034:  RLF    2B,F
+0035:  RLF    2C,F
+0036:  RLF    77,F
+0037:  RLF    7A,F
+0038:  MOVF   2E,W
+0039:  SUBWF  7A,W
+003A:  BTFSS  03.2
+003B:  GOTO   03E
+003C:  MOVF   2D,W
+003D:  SUBWF  77,W
+003E:  BTFSS  03.0
+003F:  GOTO   047
+0040:  MOVF   2D,W
+0041:  SUBWF  77,F
+0042:  BTFSS  03.0
+0043:  DECF   7A,F
+0044:  MOVF   2E,W
+0045:  SUBWF  7A,F
+0046:  BSF    03.0
+0047:  RLF    78,F
+0048:  RLF    79,F
+0049:  DECFSZ 2F,F
+004A:  GOTO   033
+004B:  RETURN
+004C:  MOVF   2C,W
+004D:  CLRF   78
+004E:  SUBWF  2B,W
+004F:  BTFSC  03.0
+0050:  GOTO   054
+0051:  MOVF   2B,W
+0052:  MOVWF  77
+0053:  GOTO   060
+0054:  CLRF   77
+0055:  MOVLW  08
+0056:  MOVWF  2D
+0057:  RLF    2B,F
+0058:  RLF    77,F
+0059:  MOVF   2C,W
+005A:  SUBWF  77,W
+005B:  BTFSC  03.0
+005C:  MOVWF  77
+005D:  RLF    78,F
+005E:  DECFSZ 2D,F
+005F:  GOTO   057
+0060:  RETURN
+....................  
+.................... #list 
+....................  
+.................... #use delay (clock = 4000000)                       
+*
+0012:  MOVLW  2B
+0013:  MOVWF  04
+0014:  BCF    03.7
+0015:  MOVF   00,W
+0016:  BTFSC  03.2
+0017:  GOTO   026
+0018:  MOVLW  01
+0019:  MOVWF  78
+001A:  CLRF   77
+001B:  DECFSZ 77,F
+001C:  GOTO   01B
+001D:  DECFSZ 78,F
+001E:  GOTO   01A
+001F:  MOVLW  4A
+0020:  MOVWF  77
+0021:  DECFSZ 77,F
+0022:  GOTO   021
+0023:  GOTO   024
+0024:  DECFSZ 00,F
+0025:  GOTO   018
+0026:  RETURN
+.................... #fuses HS,NOWDT,NOPUT,NOLVP,NOCPD,NOPROTECT,NODEBUG,NOBROWNOUT,NOWRT  
+....................  
+.................... #use fast_io(a) 
+.................... #use fast_io(b) 
+....................  
+.................... #define     delay    delay_ms(20) 
+....................  
+.................... void main(){ 
+*
+0061:  MOVF   03,W
+0062:  ANDLW  1F
+0063:  MOVWF  03
+0064:  BSF    03.5
+0065:  BSF    1F.0
+0066:  BSF    1F.1
+0067:  BSF    1F.2
+0068:  BCF    1F.3
+0069:  BCF    03.7
+....................  
+....................    setup_psp(PSP_DISABLED); 
+006A:  BCF    09.4
+....................    setup_timer_1(T1_DISABLED); 
+006B:  BCF    03.5
+006C:  CLRF   10
+....................    setup_timer_2(T2_DISABLED,0,1); 
+006D:  MOVLW  00
+006E:  MOVWF  78
+006F:  MOVWF  12
+0070:  MOVLW  00
+0071:  BSF    03.5
+0072:  MOVWF  12
+....................    setup_adc_ports(NO_ANALOGS); 
+0073:  BSF    1F.0
+0074:  BSF    1F.1
+0075:  BSF    1F.2
+0076:  BCF    1F.3
+....................    setup_adc(ADC_OFF); 
+0077:  BCF    03.5
+0078:  BCF    1F.0
+....................    setup_CCP1(CCP_OFF); 
+0079:  MOVLW  F0
+007A:  ANDWF  17,F
+....................    setup_CCP2(CCP_OFF); 
+007B:  ANDWF  1D,F
+....................     
+....................    set_tris_a(0x07); 
+007C:  MOVLW  07
+007D:  BSF    03.5
+007E:  MOVWF  05
+....................    set_tris_b(0x00);     
+007F:  MOVLW  00
+0080:  MOVWF  06
+....................     
+....................    const int a[] = {0x00,0x01,0x02,0x03,0x04,0x05,0x06,0x07,0x08,0x09};  // Display degerleri atandi 
+....................    int16 sayi = 5000,mod1000 = 0;  
+....................    int binler = 0,onlar = 0,yuzler = 0,birler = 0,mod100 = 0,mod10 = 0; 
+0081:  MOVLW  13
+0082:  BCF    03.5
+0083:  MOVWF  22
+0084:  MOVLW  88
+0085:  MOVWF  21
+0086:  CLRF   24
+0087:  CLRF   23
+0088:  CLRF   25
+0089:  CLRF   26
+008A:  CLRF   27
+008B:  CLRF   28
+008C:  CLRF   29
+008D:  CLRF   2A
+....................     
+....................    while(1){ 
+....................       
+....................      output_b(a[birler] | (0b00010000)); 
+008E:  MOVF   28,W
+008F:  CALL   004
+0090:  IORLW  10
+0091:  MOVWF  2B
+0092:  MOVWF  06
+....................      delay; 
+0093:  MOVLW  14
+0094:  MOVWF  2B
+0095:  CALL   012
+....................      output_b(a[onlar]  | (0b00100000)); 
+0096:  MOVF   26,W
+0097:  CALL   004
+0098:  IORLW  20
+0099:  MOVWF  2B
+009A:  MOVWF  06
+....................      delay; 
+009B:  MOVLW  14
+009C:  MOVWF  2B
+009D:  CALL   012
+....................      output_b(a[yuzler] | (0b01000000)); 
+009E:  MOVF   27,W
+009F:  CALL   004
+00A0:  IORLW  40
+00A1:  MOVWF  2B
+00A2:  MOVWF  06
+....................      delay; 
+00A3:  MOVLW  14
+00A4:  MOVWF  2B
+00A5:  CALL   012
+....................      output_b(a[binler] | (0b10000000)); 
+00A6:  MOVF   25,W
+00A7:  CALL   004
+00A8:  IORLW  80
+00A9:  MOVWF  2B
+00AA:  MOVWF  06
+....................      delay; 
+00AB:  MOVLW  14
+00AC:  MOVWF  2B
+00AD:  CALL   012
+....................       
+....................      if(input(pin_a0)){ 
+00AE:  BTFSS  05.0
+00AF:  GOTO   115
+....................         
+....................       sayi++; 
+00B0:  INCF   21,F
+00B1:  BTFSC  03.2
+00B2:  INCF   22,F
+....................        
+....................       binler = sayi / 1000; 
+00B3:  MOVF   22,W
+00B4:  MOVWF  2C
+00B5:  MOVF   21,W
+00B6:  MOVWF  2B
+00B7:  MOVLW  03
+00B8:  MOVWF  2E
+00B9:  MOVLW  E8
+00BA:  MOVWF  2D
+00BB:  CALL   027
+00BC:  MOVF   78,W
+00BD:  MOVWF  25
+....................       mod1000 = sayi % 1000; 
+00BE:  MOVF   22,W
+00BF:  MOVWF  2C
+00C0:  MOVF   21,W
+00C1:  MOVWF  2B
+00C2:  MOVLW  03
+00C3:  MOVWF  2E
+00C4:  MOVLW  E8
+00C5:  MOVWF  2D
+00C6:  CALL   027
+00C7:  MOVF   77,W
+00C8:  MOVWF  23
+00C9:  MOVF   7A,W
+00CA:  MOVWF  24
+....................       yuzler = mod1000/100; 
+00CB:  MOVF   24,W
+00CC:  MOVWF  2C
+00CD:  MOVF   23,W
+00CE:  MOVWF  2B
+00CF:  CLRF   2E
+00D0:  MOVLW  64
+00D1:  MOVWF  2D
+00D2:  CALL   027
+00D3:  MOVF   78,W
+00D4:  MOVWF  27
+....................       mod100 = sayi % 100; 
+00D5:  MOVF   22,W
+00D6:  MOVWF  2C
+00D7:  MOVF   21,W
+00D8:  MOVWF  2B
+00D9:  CLRF   2E
+00DA:  MOVLW  64
+00DB:  MOVWF  2D
+00DC:  CALL   027
+00DD:  MOVF   77,W
+00DE:  MOVWF  29
+....................       onlar = mod100 / 10; 
+00DF:  MOVF   29,W
+00E0:  MOVWF  2B
+00E1:  MOVLW  0A
+00E2:  MOVWF  2C
+00E3:  CALL   04C
+00E4:  MOVF   78,W
+00E5:  MOVWF  26
+....................       mod10 = sayi % 10; 
+00E6:  MOVF   22,W
+00E7:  MOVWF  2C
+00E8:  MOVF   21,W
+00E9:  MOVWF  2B
+00EA:  CLRF   2E
+00EB:  MOVLW  0A
+00EC:  MOVWF  2D
+00ED:  CALL   027
+00EE:  MOVF   77,W
+00EF:  MOVWF  2A
+....................       birler = mod10 / 1; 
+00F0:  MOVF   2A,W
+00F1:  MOVWF  28
+....................         
+....................        while(input(pin_a0)){ 
+00F2:  BTFSS  05.0
+00F3:  GOTO   115
+....................         
+....................          output_b(a[birler] | (0b00010000)); 
+00F4:  MOVF   28,W
+00F5:  CALL   004
+00F6:  IORLW  10
+00F7:  MOVWF  2B
+00F8:  MOVWF  06
+....................          delay; 
+00F9:  MOVLW  14
+00FA:  MOVWF  2B
+00FB:  CALL   012
+....................          output_b(a[onlar]  | (0b00100000)); 
+00FC:  MOVF   26,W
+00FD:  CALL   004
+00FE:  IORLW  20
+00FF:  MOVWF  2B
+0100:  MOVWF  06
+....................          delay; 
+0101:  MOVLW  14
+0102:  MOVWF  2B
+0103:  CALL   012
+....................          output_b(a[yuzler] | (0b01000000)); 
+0104:  MOVF   27,W
+0105:  CALL   004
+0106:  IORLW  40
+0107:  MOVWF  2B
+0108:  MOVWF  06
+....................          delay; 
+0109:  MOVLW  14
+010A:  MOVWF  2B
+010B:  CALL   012
+....................          output_b(a[binler] | (0b10000000)); 
+010C:  MOVF   25,W
+010D:  CALL   004
+010E:  IORLW  80
+010F:  MOVWF  2B
+0110:  MOVWF  06
+....................          delay; 
+0111:  MOVLW  14
+0112:  MOVWF  2B
+0113:  CALL   012
+0114:  GOTO   0F2
+....................        } 
+....................         
+....................      } 
+....................       
+....................      if((input(pin_a1) == 1) && (sayi != 0)){ 
+0115:  BTFSS  05.1
+0116:  GOTO   183
+0117:  MOVF   21,F
+0118:  BTFSS  03.2
+0119:  GOTO   11D
+011A:  MOVF   22,F
+011B:  BTFSC  03.2
+011C:  GOTO   183
+....................       
+....................        sayi--; 
+011D:  MOVF   21,W
+011E:  BTFSC  03.2
+011F:  DECF   22,F
+0120:  DECF   21,F
+....................        
+....................        binler = sayi / 1000; 
+0121:  MOVF   22,W
+0122:  MOVWF  2C
+0123:  MOVF   21,W
+0124:  MOVWF  2B
+0125:  MOVLW  03
+0126:  MOVWF  2E
+0127:  MOVLW  E8
+0128:  MOVWF  2D
+0129:  CALL   027
+012A:  MOVF   78,W
+012B:  MOVWF  25
+....................        mod1000 = sayi % 1000; 
+012C:  MOVF   22,W
+012D:  MOVWF  2C
+012E:  MOVF   21,W
+012F:  MOVWF  2B
+0130:  MOVLW  03
+0131:  MOVWF  2E
+0132:  MOVLW  E8
+0133:  MOVWF  2D
+0134:  CALL   027
+0135:  MOVF   77,W
+0136:  MOVWF  23
+0137:  MOVF   7A,W
+0138:  MOVWF  24
+....................        yuzler = mod1000/100; 
+0139:  MOVF   24,W
+013A:  MOVWF  2C
+013B:  MOVF   23,W
+013C:  MOVWF  2B
+013D:  CLRF   2E
+013E:  MOVLW  64
+013F:  MOVWF  2D
+0140:  CALL   027
+0141:  MOVF   78,W
+0142:  MOVWF  27
+....................        mod100 = sayi % 100; 
+0143:  MOVF   22,W
+0144:  MOVWF  2C
+0145:  MOVF   21,W
+0146:  MOVWF  2B
+0147:  CLRF   2E
+0148:  MOVLW  64
+0149:  MOVWF  2D
+014A:  CALL   027
+014B:  MOVF   77,W
+014C:  MOVWF  29
+....................        onlar = mod100 / 10; 
+014D:  MOVF   29,W
+014E:  MOVWF  2B
+014F:  MOVLW  0A
+0150:  MOVWF  2C
+0151:  CALL   04C
+0152:  MOVF   78,W
+0153:  MOVWF  26
+....................        mod10 = sayi % 10; 
+0154:  MOVF   22,W
+0155:  MOVWF  2C
+0156:  MOVF   21,W
+0157:  MOVWF  2B
+0158:  CLRF   2E
+0159:  MOVLW  0A
+015A:  MOVWF  2D
+015B:  CALL   027
+015C:  MOVF   77,W
+015D:  MOVWF  2A
+....................        birler = mod10 / 1; 
+015E:  MOVF   2A,W
+015F:  MOVWF  28
+....................           
+....................          while(input(pin_a1)){ 
+0160:  BTFSS  05.1
+0161:  GOTO   183
+....................           
+....................             output_b(a[birler] | (0b00010000)); 
+0162:  MOVF   28,W
+0163:  CALL   004
+0164:  IORLW  10
+0165:  MOVWF  2B
+0166:  MOVWF  06
+....................             delay; 
+0167:  MOVLW  14
+0168:  MOVWF  2B
+0169:  CALL   012
+....................             output_b(a[onlar]  | (0b00100000)); 
+016A:  MOVF   26,W
+016B:  CALL   004
+016C:  IORLW  20
+016D:  MOVWF  2B
+016E:  MOVWF  06
+....................             delay; 
+016F:  MOVLW  14
+0170:  MOVWF  2B
+0171:  CALL   012
+....................             output_b(a[yuzler] | (0b01000000)); 
+0172:  MOVF   27,W
+0173:  CALL   004
+0174:  IORLW  40
+0175:  MOVWF  2B
+0176:  MOVWF  06
+....................             delay; 
+0177:  MOVLW  14
+0178:  MOVWF  2B
+0179:  CALL   012
+....................             output_b(a[binler] | (0b10000000)); 
+017A:  MOVF   25,W
+017B:  CALL   004
+017C:  IORLW  80
+017D:  MOVWF  2B
+017E:  MOVWF  06
+....................             delay; 
+017F:  MOVLW  14
+0180:  MOVWF  2B
+0181:  CALL   012
+0182:  GOTO   160
+....................              
+....................          } 
+....................      } 
+....................       
+....................      if(input(pin_a2) == 1){ 
+0183:  BTFSS  05.2
+0184:  GOTO   18B
+....................       
+....................        sayi = 0; 
+0185:  CLRF   22
+0186:  CLRF   21
+....................        binler = 0; 
+0187:  CLRF   25
+....................        yuzler = 0; 
+0188:  CLRF   27
+....................        onlar = 0; 
+0189:  CLRF   26
+....................        birler = 0; 
+018A:  CLRF   28
+....................      } 
+018B:  GOTO   08E
+....................             
+....................    } 
+....................        
+.................... } 
+018C:  SLEEP
+
+Configuration Fuses:
+   Word  1: 3F3A   HS NOWDT NOPUT NOBROWNOUT NOLVP NOCPD NOWRT NODEBUG NOPROTECT

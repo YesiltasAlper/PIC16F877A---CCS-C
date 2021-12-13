@@ -1,0 +1,7 @@
+ÀÄCCS_C
+   ÃÄMAIN  0/59  Ram=0
+   ³  ÀÄ@cinit1  (Inline)  Ram=0
+   ÃÄtimer0_kesme  0/7  Ram=0
+   ÀÄtimer1_kesme  0/62  Ram=1
+      ÃÄ@delay_ms1  0/21  Ram=1
+      ÀÄ@delay_ms1  0/21  Ram=1

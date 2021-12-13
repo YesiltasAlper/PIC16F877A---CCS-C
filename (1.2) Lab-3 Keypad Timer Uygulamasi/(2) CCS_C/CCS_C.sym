@@ -1,0 +1,128 @@
+004-005 @WRITE_PROGRAM_MEMORY8.P1
+004-005 @READ_PROGRAM_MEMORY8.P2
+006     lcd
+006     lcdlat
+008     PSP_DATA
+015     CCP_1
+015     CCP_1_LOW
+016     CCP_1_HIGH
+01B     CCP_2
+01B     CCP_2_LOW
+01C     CCP_2_HIGH
+020-021 hedef
+022-023 binler
+024-025 yuzler
+026-027 onlar
+028-029 birler
+02A-02B tus_degeri
+02C-02D t
+02E-02F x
+030-031 sayac
+032     lcd_init.i
+032-033 @MUL1616.P1
+032-033 @PRINTF_LU_640.P2
+032     MAIN.@SCRATCH1
+032     @PSTRINGC7_640.@SCRATCH1
+032     temizle.@SCRATCH1
+032     surehesap.@SCRATCH1
+033-036 lcd_init.LCD_INIT_STRING
+033     @PSTRINGC7_640.@SCRATCH2
+033     surehesap.@SCRATCH2
+034-035 @MUL1616.P1
+034     @PSTRINGC7_640.@SCRATCH3
+034     @PRINTF_LU_640.@SCRATCH1
+035     @PSTRINGC7_640.@SCRATCH4
+035     @PRINTF_LU_640.@SCRATCH2
+036     @PRINTF_LU_640.@SCRATCH3
+036     @MUL1616.@SCRATCH1
+037     lcd_init.@SCRATCH1
+037     @PRINTF_LU_640.@SCRATCH4
+038     @PRINTF_LU_640.@SCRATCH5
+039     @PRINTF_LU_640.@SCRATCH6
+03A     @PRINTF_LU_640.@SCRATCH7
+03B     lcd_putc.c
+03C     lcd_gotoxy.x
+03C     @delay_ms1.P1
+03D     lcd_gotoxy.y
+03E     lcd_gotoxy.address
+03F     lcd_gotoxy.@SCRATCH1
+040     lcd_send_byte.address
+041     lcd_send_byte.n
+042     lcd_read_byte.low
+042     lcd_send_byte.@SCRATCH1
+043     lcd_send_nibble.n
+043     lcd_read_byte.high
+044     lcd_read_byte.@SCRATCH1
+077     @SCRATCH
+078     @SCRATCH
+078     _RETURN_
+079     @SCRATCH
+07A     @SCRATCH
+086     lcdtris
+10D-10E @WRITE_PROGRAM_MEMORY8.P1
+10D-10E @READ_PROGRAM_MEMORY8.P2
+
+ROM Allocation:
+000004  @const669.call
+000008  @const671.call
+00000A  @const672.call
+00000E  @const673.call
+000013  @const674.call
+000018  @const678.call
+00001D  @const679.call
+000021  @const680.call
+000023  @const681.call
+000027  @const682.call
+00002C  @const683.call
+000031  @delay_ms1
+000046  lcd_send_nibble
+000052  lcd_read_nibble
+000058  lcd_send_byte
+00005E  lcd_read_byte
+000098  lcd_init
+0000D6  lcd_gotoxy
+0000E8  lcd_putc
+000114  @PSTRINGC7_640
+00016A  tus_oku
+00020D  @PRINTF_LU_640
+000270  calis
+0002AC  temizle
+000301  @MUL1616
+000316  surehesap
+000374  yaz
+000386  @cinit1
+000386  MAIN
+0003A1  @cinit2
+
+Project Directory:
+    C:\Users\Admin\Desktop\CCS_Github_\(3) Lab-3\(2) CCS_C\
+
+Project Files:
+    CCS_C.c                                                 [04-Kas-21 17:21  CRC=F3F89B3F]
+    ..\..\..\..\..\..\Program Files (x86)\PICC\Devices\16f877.h [12-Kas-13 14:35  CRC=ADB5114D]
+    ..\..\..\..\..\..\Program Files (x86)\PICC\Drivers\lcd.c [19-Eyl-13 15:38  CRC=D1A6378A]
+
+Source signature=44FA1BA0
+
+Units:
+    CCS_C (main)
+
+Compiler Settings:
+    Processor:      PIC16F877
+    Pointer Size:   16
+    ADC Range:      0-255
+    Opt Level:      9
+    Short,Int,Long: UNSIGNED: 1,8,16
+    Float,Double:   32,32
+
+Output Files:
+    XREF file:   CCS_C.xsym
+    Errors:      CCS_C.err
+    Ext Symbols: CCS_C.esym
+    INHX8:       CCS_C.hex
+    Symbols:     CCS_C.sym
+    List:        CCS_C.lst
+    Debug/COFF:  CCS_C.cof
+    Project:     CCS_C.ccspjt
+    Call Tree:   CCS_C.tre
+    Statistics:  CCS_C.STA
