@@ -1,0 +1,65 @@
+004-005 @READ_PROGRAM_MEMORY8.P1
+004-005 @WRITE_PROGRAM_MEMORY8.P2
+008     PSP_DATA
+015     CCP_1_LOW
+015     CCP_1
+016     CCP_1_HIGH
+01B     CCP_2
+01B     CCP_2_LOW
+01C     CCP_2_HIGH
+021     main.sayi
+022     main.onlar
+023     main.birler
+024     @DIV88.P1
+024     @delay_ms1.P2
+024     main.@SCRATCH1
+025     @DIV88.P1
+026     @DIV88.@SCRATCH1
+077     @SCRATCH
+078     @SCRATCH
+078     _RETURN_
+079     @SCRATCH
+07A     @SCRATCH
+10D-10E @READ_PROGRAM_MEMORY8.P1
+10D-10E @WRITE_PROGRAM_MEMORY8.P2
+
+ROM Allocation:
+000004  a.call
+000008  a.data
+000012  @DIV88
+000027  @delay_ms1
+00003C  main
+00003C  @cinit1
+000044  @cinit2
+
+Project Directory:
+    C:\Users\Admin\Desktop\CCS_Github_\(6) 7 Segment Arttir-Azalt_0-99\(2) CCS_C\
+
+Project Files:
+    CCS_C.c                                                 [04-Kas-21 15:42  CRC=165C2A08]
+    ..\..\..\..\..\..\Program Files (x86)\PICC\Devices\16f877.h [12-Kas-13 14:35  CRC=ADB5114D]
+
+Source signature=71C64CA2
+
+Units:
+    CCS_C (main)
+
+Compiler Settings:
+    Processor:      PIC16F877
+    Pointer Size:   16
+    ADC Range:      0-255
+    Opt Level:      9
+    Short,Int,Long: UNSIGNED: 1,8,16
+    Float,Double:   32,32
+
+Output Files:
+    XREF file:   CCS_C.xsym
+    Errors:      CCS_C.err
+    Ext Symbols: CCS_C.esym
+    INHX8:       CCS_C.hex
+    Symbols:     CCS_C.sym
+    List:        CCS_C.lst
+    Debug/COFF:  CCS_C.cof
+    Project:     CCS_C.ccspjt
+    Call Tree:   CCS_C.tre
+    Statistics:  CCS_C.STA
